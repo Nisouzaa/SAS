@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^10.3.0",
+    "nodemon": "^3.1.14"
+  },
+
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "lint": "eslint ."
+  } 
+}
+

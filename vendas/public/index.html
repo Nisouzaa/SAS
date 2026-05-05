@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>SAS Dashboard</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    button { padding: 10px; margin-bottom: 20px; }
+    pre { background: #111; color: #0f0; padding: 15px; overflow: auto; }
+  </style>
+</head>
+<body>
+
+  <h1>Dashboard SAS</h1>
+
+  <button onclick="runPipeline()">Rodar Pipeline</button>
+  <button onclick="loadData()">Carregar Dados</button>
+
+  <h2>Resultado:</h2>
+  <pre id="output">Clique em "Carregar Dados"</pre>
+
+  <script>
+    async function runPipeline() {
+      const res = await fetch('/api/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+      });
+
+      const data = await res.json();
+      alert("Pipeline executado!");
+      console.log(data);
+    }
+
+    async function loadData() {
+      const res = await fetch('/api/data');
+
+      if (!res.ok) {
+        document.getElementById('output').textContent =
+          "Nenhum dado ainda. Rode o pipeline primeiro.";
+        return;
+      }
+
+      const data = await res.json();
+
+      document.getElementById('output').textContent =
+        JSON.stringify(data, null, 2);
+    }
+  </script>
+
+</body>
+</html>
